@@ -1,0 +1,71 @@
+# do compile.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# C:\questasim64_10.7c/verilog_src/uvm-1.1d
+# +incdir+./src/common
+# +incdir+./src/slave
+# +incdir+./src/master
+# +incdir+./tb
+# +incdir+C:\questasim64_10.7c/verilog_src/uvm-1.1d/src
+# Compiling common files...
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+# Start time: 01:01:17 on Nov 01,2025
+# vlog -work work -L mtiUvm -sv -cover bcesft -mfcu -suppress 2181 -suppress 8386 "+incdir+C:\questasim64_10.7c/verilog_src/uvm-1.1d/src" "+incdir+./src/common" ./src/common/apb_defines.svh ./src/common/apb_if.sv ./src/common/apb_base_seq_item.svh ./src/common/apb_coverage.svh ./src/common/apb_common_pkg.sv 
+# -- Compiling interface apb_if
+# -- Compiling package apb_defines_svh_unit
+# -- Importing package uvm_pkg (uvm-1.1d Built-in)
+# -- Importing package apb_common_pkg
+# -- Compiling package apb_common_pkg
+# 
+# Top level modules:
+# 	--none--
+# End time: 01:01:18 on Nov 01,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Compiling slave files...
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+# Start time: 01:01:18 on Nov 01,2025
+# vlog -work work -L mtiUvm -sv -cover bcesft -mfcu -suppress 2181 -suppress 8386 "+incdir+C:\questasim64_10.7c/verilog_src/uvm-1.1d/src" "+incdir+./src/common" "+incdir+./src/slave" ./src/slave/apb_slave_config.svh ./src/slave/apb_slave_seq_item.svh ./src/slave/apb_slave_sequencer.svh ./src/slave/apb_slave_driver.svh ./src/slave/apb_slave_monitor.svh ./src/slave/apb_slave_agent.svh ./src/slave/apb_slave_seq.svh ./src/slave/apb_slave_pkg.sv 
+# ** Error: (vlog-13069) ./src/slave/apb_slave_seq_item.svh(4): near "apb_base_seq_item": syntax error, unexpected IDENTIFIER.
+# ** Error: ./src/slave/apb_slave_seq_item.svh(4): Error in class extension specification.
+# ** Error: ./src/slave/apb_slave_driver.svh(38):  Failed to find the name 'type_id' in scope 'apb_slave_seq_item' at ./src/slave/apb_slave_seq_item.svh(4).
+# ** Error: ./src/slave/apb_slave_monitor.svh(8): (vlog-2730) Undefined variable: 'apb_base_seq_item'.
+# ** Error: ./src/slave/apb_slave_monitor.svh(9): Invalid type 'apb_coverage'. Please check the type of the variable 'apb_cov'.
+# ** Error: ./src/slave/apb_slave_monitor.svh(19): (vlog-2730) Undefined variable: 'apb_cov'.
+# ** Error: (vlog-13069) ./src/slave/apb_slave_monitor.svh(50): near ";": syntax error, unexpected ';', expecting '('.
+# ** Error: ./src/slave/apb_slave_monitor.svh(57): (vlog-2730) Undefined variable: 'tr'.
+# ** Error: ./src/slave/apb_slave_monitor.svh(57): (vlog-2164) Class or package 'apb_base_seq_item' not found.
+# ** Error: (vlog-13069) ./src/slave/apb_slave_monitor.svh(57): near "::": syntax error, unexpected ::, expecting ';'.
+# ** Error: ./src/slave/apb_slave_monitor.svh(58): (vlog-2164) Class or package 'apb_base_seq_item' not found.
+# ** Error: (vlog-13069) ./src/slave/apb_slave_monitor.svh(58): near "::": syntax error, unexpected ::.
+# ** Error: ./src/slave/apb_slave_monitor.svh(58): (vlog-2164) Class or package 'apb_base_seq_item' not found.
+# ** Error: ./src/slave/apb_slave_agent.svh(12): Invalid type 'apb_slave_seq'. Please check the type of the variable 'm_apb_slave_seq'.
+# ** Error: ./src/slave/apb_slave_agent.svh(37):  Failed to find the name 'type_id' in scope 'apb_slave_seq_item' at ./src/slave/apb_slave_seq_item.svh(4).
+# ** Error: ./src/slave/apb_slave_agent.svh(38): (vlog-2730) Undefined variable: 'm_apb_slave_seq'.
+# ** Error: ./src/slave/apb_slave_agent.svh(38): (vlog-2164) Class or package 'apb_slave_seq' not found.
+# ** Error: ./src/slave/apb_slave_agent.svh(38): (vlog-2730) Undefined variable: 'apb_slave_seq'.
+# ** Error: (vlog-13069) ./src/slave/apb_slave_agent.svh(38): near "::": syntax error, unexpected ::, expecting ';'.
+# ** Error: ./src/slave/apb_slave_seq.svh(24):  Failed to find the name 'type_id' in scope 'apb_slave_seq_item' at ./src/slave/apb_slave_seq_item.svh(4).
+# ** Error: ./src/slave/apb_slave_seq.svh(33): (vlog-2164) Class or package 'apb_base_seq_item' not found.
+# ** Error: ./src/slave/apb_slave_seq.svh(33): (vlog-2730) Undefined variable: 'apb_base_seq_item'.
+# ** Error: (vlog-13069) ./src/slave/apb_slave_seq.svh(33): near "::": syntax error, unexpected ::.
+# ** Error: ** while parsing macro expansion: 'uvm_info' starting at ./src/slave/apb_slave_seq.svh(41)
+# ** at ./src/slave/apb_slave_seq.svh(41): (vlog-2164) Class or package 'apb_base_seq_item' not found.
+# ** Error: (vlog-13069) ** while parsing macro expansion: 'uvm_info' starting at ./src/slave/apb_slave_seq.svh(41)
+# ** at ./src/slave/apb_slave_seq.svh(41): near "::": syntax error, unexpected ::.
+# ** Error: (vlog-13069) ./src/slave/apb_slave_seq.svh(47): near "end": syntax error, unexpected end.
+# ** Error: ./src/slave/apb_slave_pkg.sv(8): Cannot find `include file "../src/common/apb_defines.svh" in directories:
+#     C:\questasim64_10.7c/verilog_src/uvm-1.1d/src, ./src/common, ./src/slave, C:/questasim64_10.7c/ovm-2.1.2/../verilog_src/ovm-2.1.2/src
+# ** Error: ** while parsing file included at ./src/slave/apb_slave_pkg.sv(11)
+# ** at ./src/slave/apb_slave_seq.svh(1): Illegal declaration after the statement near line '4'.  Declarations must precede statements.  Look for stray semicolons.
+# ** while parsing file included at ./src/slave/apb_slave_pkg.sv(11)
+# ** while parsing macro expansion: 'uvm_object_utils' starting at ./src/slave/apb_slave_seq.svh(3)
+# ** at ./src/slave/apb_slave_seq.svh(3): Verilog Compiler exiting
+# End time: 01:01:19 on Nov 01,2025, Elapsed time: 0:00:01
+# Errors: 28, Warnings: 0
+# ** Error: C:/questasim64_10.7c/win64/vlog failed.
+# Error in macro ./compile.do line 35
+# C:/questasim64_10.7c/win64/vlog failed.
+#     while executing
+# "vlog -work work -L mtiUvm -sv -cover bcesft -mfcu -suppress 2181 -suppress 8386 \
+#     $UVM_INCDIR $COMMON_INCDIR $SLAVE_INCDIR \
+#     ./src/slave/apb_s..."
+#  quit
