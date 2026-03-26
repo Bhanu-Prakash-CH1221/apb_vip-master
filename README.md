@@ -20,97 +20,433 @@ This is a **production-ready UVM-based Verification IP (VIP)** for the **Advance
 - ✅ **Windows-Compatible** with MinGW64 toolchain support
 - ✅ **Production-Ready** with proven stability and reliability
 
-## 📁 Complete Project Structure
+## 📁 In-Depth Project Structure
+
+### **🎯 Complete Directory Architecture**
 
 ```
 apb_vip-master/
-├── 📄 README.md                    # This file - comprehensive project documentation
+│
+├── 📄 README.md                    # Comprehensive project documentation
 ├── 📄 .gitignore                   # Git ignore rules for simulation artifacts
 │
-├── 📂 src/                         # Source code directory
-│   ├── 📂 common/                  # Shared components across agents
-│   │   ├── 📄 APB_master.sv        # Master-side APB interface module
-│   │   ├── 📄 APB_slave.sv         # Slave-side APB interface module  
-│   │   ├── 📄 apb_base_seq_item.svh # Base transaction item class
-│   │   ├── 📄 apb_common_pkg.sv     # Common package with shared definitions
-│   │   ├── 📄 apb_coverage.svh     # Coverage collector for APB protocol
-│   │   ├── 📄 apb_defines.svh      # Protocol-wide constants and definitions
-│   │   └── 📄 apb_if.sv            # Main APB interface with assertions
+├── 📂 src/                         # 🔧 Source code directory
 │   │
-│   ├── 📂 master/                  # Master agent implementation
-│   │   ├── 📄 apb_master_agent.svh     # Master agent component
-│   │   ├── 📄 apb_master_config.svh    # Master configuration object
-│   │   ├── 📄 apb_master_driver.svh    # Master driver (drives PSEL/PENABLE/PWRITE)
-│   │   ├── 📄 apb_master_monitor.svh   # Master monitor (captures transactions)
-│   │   ├── 📄 apb_master_pkg.sv        # Master package with all components
-│   │   ├── 📄 apb_master_read_seq.svh  # Read-only sequence
-│   │   ├── 📄 apb_master_seq.svh       # Base master sequence
-│   │   ├── 📄 apb_master_seq_item.svh  # Master-specific transaction item
-│   │   ├── 📄 apb_master_sequencer.svh # Master sequencer
-│   │   ├── 📄 apb_master_write_seq.svh # Write-only sequence
-│   │   └── 📄 apb_master_driver.sv     # Master driver module
+│   ├── 📂 common/                  # 🔄 Shared components across agents
+│   │   │
+│   │   ├── 📄 APB_master.sv        # 🎛️ Master-side APB interface module
+│   │   │   ├── Purpose: Physical interface instantiation for master side
+│   │   │   ├── Signals: PCLK, PRESET_N, PSEL, PENABLE, PWRITE, PADDR, PWDATA
+│   │   │   └── Features: Clock/reset generation, signal monitoring
+│   │   │
+│   │   ├── 📄 APB_slave.sv         # 🎛️ Slave-side APB interface module  
+│   │   │   ├── Purpose: Physical interface instantiation for slave side
+│   │   │   ├── Signals: PCLK, PRESET_N, PSEL, PENABLE, PWRITE, PADDR, PWDATA
+│   │   │   │                     PREADY, PRDATA, PSLVERR
+│   │   │   └── Features: Slave response generation, error injection
+│   │   │
+│   │   ├── 📄 apb_base_seq_item.svh # 📦 Base transaction item class
+│   │   │   ├── Purpose: Base class for all APB transactions
+│   │   │   ├── Properties: addr, data, write, enable, sel, error
+│   │   │   ├── Methods: copy(), compare(), print(), pack/unpack
+│   │   │   └── Inheritance: uvm_sequence_item
+│   │   │
+│   │   ├── 📄 apb_common_pkg.sv     # 📦 Common package with shared definitions
+│   │   │   ├── Purpose: Central package for all shared components
+│   │   │   ├── Contents: Typedefs, constants, utility functions
+│   │   │   ├── Exports: All common classes and enums
+│   │   │   └── Dependencies: None (base package)
+│   │   │
+│   │   ├── 📄 apb_coverage.svh     # 📊 Coverage collector for APB protocol
+│   │   │   ├── Purpose: Functional coverage collection
+│   │   │   ├── Covergroups: 
+│   │   │   │   - cg_transaction: Address, data, operation coverage
+│   │   │   │   - cg_timing: Setup/hold time coverage
+│   │   │   │   - cg_reset: Reset state coverage
+│   │   │   └── Features: Automatic coverage reporting
+│   │   │
+│   │   ├── 📄 apb_defines.svh      # 📋 Protocol-wide constants and definitions
+│   │   │   ├── Purpose: Centralized constant definitions
+│   │   │   ├── Contents: Timing parameters, address widths, data widths
+│   │   │   ├── Parameters: APB_ADDR_WIDTH, APB_DATA_WIDTH, timing values
+│   │   │   └── Usage: `include throughout all files
+│   │   │
+│   │   └── 📄 apb_if.sv            # 🔌 Main APB interface with assertions
+│   │       ├── Purpose: Primary APB interface definition
+│   │       ├── Signals: Complete APB protocol signal set
+│   │       ├── Assertions: 
+│   │       │   - PSEL before PENABLE
+│   │       │   - Proper reset behavior
+│   │       │   - Timing relationships
+│   │       ├── Clocking blocks: Master and slave domains
+│   │       └── Modports: Master, slave, monitor views
 │   │
-│   └── 📂 slave/                   # Slave agent implementation
-│       ├── 📄 apb_slave_agent.svh       # Slave agent component
-│       ├── 📄 apb_slave_config.svh      # Slave configuration object
-│       ├── 📄 apb_slave_driver.svh      # Slave driver (drives PREADY/PRDATA)
-│       ├── 📄 apb_slave_monitor.svh     # Slave monitor (captures responses)
-│       ├── 📄 apb_slave_pkg.sv          # Slave package with all components
-│       ├── 📄 apb_slave_seq.svh         # Slave response sequence
-│       ├── 📄 apb_slave_seq_item.svh    # Slave-specific transaction item
-│       ├── 📄 apb_slave_sequencer.svh   # Slave sequencer
-│       └── 📄 apb_slave_driver.sv       # Slave driver module
+│   ├── 📂 master/                  # 🎯 Master agent implementation
+│   │   │
+│   │   ├── 📄 apb_master_agent.svh     # 🏢 Master agent component
+│   │   │   ├── Purpose: Top-level master agent container
+│   │   │   ├── Components: Driver, monitor, sequencer
+│   │   │   ├── Configuration: apb_master_config
+│   │   │   ├── Analysis ports: Transaction broadcasting
+│   │   │   └── Inheritance: uvm_agent
+│   │   │
+│   │   ├── 📄 apb_master_config.svh    # ⚙️ Master configuration object
+│   │   │   ├── Purpose: Master agent configuration
+│   │   │   ├── Parameters: Active/passive mode, is_master
+│   │   │   ├── Virtual interface: apb_if connection
+│   │   │   ├── Features: Timing configuration, address mapping
+│   │   │   └── Inheritance: uvm_object
+│   │   │
+│   │   ├── 📄 apb_master_driver.svh    # 🚗 Master driver (drives APB signals)
+│   │   │   ├── Purpose: Drive master-side APB protocol
+│   │   │   ├── Signals driven: PSEL, PENABLE, PWRITE, PADDR, PWDATA
+│   │   │   ├── Sequencer interface: apb_master_seq_item
+│   │   │   ├── Timing: Configurable setup/hold times
+│   │   │   ├── Features: Reset handling, error injection
+│   │   │   └── Inheritance: uvm_driver #(apb_master_seq_item)
+│   │   │
+│   │   ├── 📄 apb_master_monitor.svh   # 👁️ Master monitor (captures transactions)
+│   │   │   ├── Purpose: Monitor master-side transactions
+│   │   │   ├── Signals monitored: All APB signals
+│   │   │   ├── Transaction capture: Edge-triggered with proper timing
+│   │   │   ├── Analysis ports: Transaction broadcasting
+│   │   │   ├── Features: Protocol checking, coverage collection
+│   │   │   └── Inheritance: uvm_monitor
+│   │   │
+│   │   ├── 📄 apb_master_pkg.sv        # 📦 Master package with all components
+│   │   │   ├── Purpose: Package all master agent components
+│   │   │   ├── Contents: All master classes and sequences
+│   │   │   ├── Imports: uvm_pkg, apb_common_pkg
+│   │   │   └── Exports: Complete master agent API
+│   │   │
+│   │   ├── 📄 apb_master_read_seq.svh  # 📖 Read-only sequence
+│   │   │   ├── Purpose: Generate read-only transactions
+│   │   │   ├── Pattern: Random address reads
+│   │   │   ├── Configuration: Number of transactions, address range
+│   │   │   ├── Features: Sequential and random addressing
+│   │   │   └── Inheritance: apb_master_seq
+│   │   │
+│   │   ├── 📄 apb_master_seq.svh       # 🔄 Base master sequence
+│   │   │   ├── Purpose: Base class for all master sequences
+│   │   │   ├── Sequencer: apb_master_sequencer
+│   │   │   ├── Item type: apb_master_seq_item
+│   │   │   ├── Methods: pre_body(), post_body()
+│   │   │   └── Inheritance: uvm_sequence #(apb_master_seq_item)
+│   │   │
+│   │   ├── 📄 apb_master_seq_item.svh  # 📝 Master-specific transaction item
+│   │   │   ├── Purpose: Master transaction with extended features
+│   │   │   ├── Extensions: Master-specific fields, constraints
+│   │   │   ├── Randomization: Constrained random generation
+│   │   │   ├── Features: Address alignment, data patterns
+│   │   │   └── Inheritance: apb_base_seq_item
+│   │   │
+│   │   ├── 📄 apb_master_sequencer.svh # 🎮 Master sequencer
+│   │   │   ├── Purpose: Sequence arbitration and execution
+│   │   │   ├── Sequencer type: uvm_sequencer #(apb_master_seq_item)
+│   │   │   ├── Features: Priority arbitration, sequence locking
+│   │   │   ├── Configuration: Default sequences, timing
+│   │   │   └── Inheritance: uvm_sequencer
+│   │   │
+│   │   ├── 📄 apb_master_write_seq.svh # ✍️ Write-only sequence
+│   │   │   ├── Purpose: Generate write-only transactions
+│   │   │   ├── Pattern: Random address writes with data
+│   │   │   ├── Configuration: Number of transactions, data patterns
+│   │   │   ├── Features: Sequential and random addressing
+│   │   │   └── Inheritance: apb_master_seq
+│   │   │
+│   │   └── 📄 apb_master_driver.sv     # 🚗 Master driver module
+│   │       ├── Purpose: SystemVerilog module wrapper for driver
+│   │       ├── Interface: apb_if connection
+│   │       ├── Instantiation: apb_master_driver class
+│   │       └── Features: Module-level connectivity
+│   │
+│   └── 📂 slave/                   # 🎯 Slave agent implementation
+│       │
+│       ├── 📄 apb_slave_agent.svh       # 🏢 Slave agent component
+│       │   ├── Purpose: Top-level slave agent container
+│       │   ├── Components: Driver, monitor, sequencer
+│       │   ├── Configuration: apb_slave_config
+│       │   ├── Analysis ports: Transaction broadcasting
+│       │   └── Inheritance: uvm_agent
+│       │
+│       ├── 📄 apb_slave_config.svh      # ⚙️ Slave configuration object
+│       │   ├── Purpose: Slave agent configuration
+│       │   ├── Parameters: Active/passive mode, memory model
+│       │   ├── Virtual interface: apb_if connection
+│       │   ├── Features: Response timing, error injection
+│       │   └── Inheritance: uvm_object
+│       │
+│       ├── 📄 apb_slave_driver.svh      # 🚗 Slave driver (drives slave responses)
+│       │   ├── Purpose: Drive slave-side APB protocol
+│       │   ├── Signals driven: PREADY, PRDATA, PSLVERR
+│       │   ├── Sequencer interface: apb_slave_seq_item
+│       │   ├── Response timing: Configurable PREADY delays
+│       │   ├── Features: Memory modeling, error injection
+│       │   └── Inheritance: uvm_driver #(apb_slave_seq_item)
+│       │
+│       ├── 📄 apb_slave_monitor.svh     # 👁️ Slave monitor (captures responses)
+│       │   ├── Purpose: Monitor slave-side responses
+│       │   ├── Signals monitored: PREADY, PRDATA, PSLVERR
+│       │   ├── Transaction capture: Response completion timing
+│       │   ├── Analysis ports: Response broadcasting
+│       │   ├── Features: Protocol checking, coverage collection
+│       │   └── Inheritance: uvm_monitor
+│       │
+│       ├── 📄 apb_slave_pkg.sv          # 📦 Slave package with all components
+│       │   ├── Purpose: Package all slave agent components
+│       │   ├── Contents: All slave classes and sequences
+│       │   ├── Imports: uvm_pkg, apb_common_pkg
+│       │   └── Exports: Complete slave agent API
+│       │
+│       ├── 📄 apb_slave_seq.svh         # 🔄 Slave response sequence
+│       │   ├── Purpose: Generate slave response transactions
+│       │   ├── Pattern: Respond to master transactions
+│       │   ├── Configuration: Response delays, error rates
+│       │   ├── Features: Memory responses, error injection
+│       │   └── Inheritance: uvm_sequence #(apb_slave_seq_item)
+│       │
+│       ├── 📄 apb_slave_seq_item.svh    # 📝 Slave-specific transaction item
+│       │   ├── Purpose: Slave transaction with response features
+│       │   ├── Extensions: Response fields, timing parameters
+│       │   ├── Randomization: Response delay, error injection
+│       │   ├── Features: Memory modeling, status reporting
+│       │   └── Inheritance: apb_base_seq_item
+│       │
+│       ├── 📄 apb_slave_sequencer.svh   # 🎮 Slave sequencer
+│       │   ├── Purpose: Slave response sequence management
+│       │   ├── Sequencer type: uvm_sequencer #(apb_slave_seq_item)
+│       │   ├── Features: Response arbitration, timing control
+│       │   ├── Configuration: Default response sequences
+│       │   └── Inheritance: uvm_sequencer
+│       │
+│       └── 📄 apb_slave_driver.sv       # 🚗 Slave driver module
+│           ├── Purpose: SystemVerilog module wrapper for driver
+│           ├── Interface: apb_if connection
+│           ├── Instantiation: apb_slave_driver class
+│           └── Features: Module-level connectivity
 │
-├── 📂 tb/                          # Testbench directory
-│   ├── 📂 tests/                   # Comprehensive test suite
-│   │   ├── 📄 apb_basic_test.svh       # Basic APB protocol verification
-│   │   ├── 📄 apb_factory_test.svh     # UVM factory pattern testing
-│   │   ├── 📄 apb_field_auto_test.svh  # Field automation testing
-│   │   ├── 📄 apb_master_passive_test.svh # Master agent passive mode
-│   │   ├── 📄 apb_nocfg_test.svh       # No configuration testing
-│   │   ├── 📄 apb_passive_test.svh     # Passive mode testing
-│   │   ├── 📄 apb_protocol_test.svh    # Protocol compliance verification
-│   │   ├── 📄 apb_read_only_test.svh   # Read-only transaction testing
-│   │   ├── 📄 apb_reset_test.svh       # Reset functionality testing
-│   │   ├── 📄 apb_timing_test.svh      # Timing parameter testing
-│   │   ├── 📄 apb_transaction_test.svh  # Transaction level testing
-│   │   ├── 📄 apb_uvm_macro_test.svh   # UVM macro testing
-│   │   └── 📄 apb_write_only_test.svh  # Write-only transaction testing
+├── 📂 tb/                          # 🧪 Testbench directory
 │   │
-│   ├── 📄 apb_env.svh               # Testbench environment (contains both agents)
-│   ├── 📄 apb_scoreboard.svh       # Transaction scoreboard (data integrity checking)
-│   ├── 📄 apb_test_pkg.sv          # Test package with all test registrations
-│   └── 📄 testbench.sv             # Top-level testbench module
+│   ├── 📂 tests/                   # 📋 Comprehensive test suite
+│   │   │
+│   │   ├── 📄 apb_basic_test.svh       # 🔧 Basic APB protocol verification
+│   │   │   ├── Purpose: Core functionality verification
+│   │   │   ├── Test cases: Read/write operations
+│   │   │   ├── Verification: Protocol compliance
+│   │   │   ├── Duration: ~1000 transactions
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_factory_test.svh     # 🏭 UVM factory pattern testing
+│   │   │   ├── Purpose: Factory mechanism verification
+│   │   │   ├── Test cases: Object creation, type overrides
+│   │   │   ├── Verification: Factory registration
+│   │   │   ├── Features: Dynamic configuration
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_field_auto_test.svh  # 🤖 Field automation testing
+│   │   │   ├── Purpose: UVM field macros verification
+│   │   │   ├── Test cases: `uvm_field_* macro functionality
+│   │   │   ├── Verification: Copy/compare/print operations
+│   │   │   ├── Features: Automatic field registration
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_master_passive_test.svh # 😴 Master agent passive mode
+│   │   │   ├── Purpose: Master passive mode verification
+│   │   │   ├── Configuration: Master passive, slave active
+│   │   │   ├── Verification: Monitor-only functionality
+│   │   │   ├── Features: Mixed active/passive agents
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_nocfg_test.svh       # ⚠️ No configuration testing
+│   │   │   ├── Purpose: Default configuration verification
+│   │   │   ├── Test cases: VIP without explicit config
+│   │   │   ├── Verification: Default parameter usage
+│   │   │   ├── Features: Automatic configuration
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_passive_test.svh     # 😴 Passive mode testing
+│   │   │   ├── Purpose: Full passive mode verification
+│   │   │   ├── Configuration: Both agents passive
+│   │   │   ├── Verification: Monitor-only operation
+│   │   │   ├── Features: External stimulus testing
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_protocol_test.svh    # 📜 Protocol compliance verification
+│   │   │   ├── Purpose: Comprehensive protocol checking
+│   │   │   ├── Test cases: Edge cases, corner conditions
+│   │   │   ├── Verification: Assertion coverage
+│   │   │   ├── Features: Protocol violation detection
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_read_only_test.svh   # 📖 Read-only transaction testing
+│   │   │   ├── Purpose: Read operation verification
+│   │   │   ├── Test cases: Various read patterns
+│   │   │   ├── Verification: Address decoding, data return
+│   │   │   ├── Features: Sequential/random reads
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_reset_test.svh       # 🔄 Reset functionality testing
+│   │   │   ├── Purpose: Reset behavior verification
+│   │   │   ├── Test cases: Reset during transactions
+│   │   │   ├── Verification: Reset recovery
+│   │   │   ├── Features: Reset timing, state clearing
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_timing_test.svh      # ⏱️ Timing parameter testing
+│   │   │   ├── Purpose: Timing configuration verification
+│   │   │   ├── Test cases: Various timing parameters
+│   │   │   ├── Verification: Setup/hold time compliance
+│   │   │   ├── Features: Configurable delays
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_transaction_test.svh  # 📝 Transaction level testing
+│   │   │   ├── Purpose: Transaction modeling verification
+│   │   │   ├── Test cases: Transaction randomization
+│   │   │   ├── Verification: Sequence item properties
+│   │   │   ├── Features: Transaction constraints
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   ├── 📄 apb_uvm_macro_test.svh   # 📋 UVM macro testing
+│   │   │   ├── Purpose: UVM macro functionality verification
+│   │   │   ├── Test cases: `uvm_info`, `uvm_error`, etc.
+│   │   │   ├── Verification: Reporting mechanisms
+│   │   │   ├── Features: Macro expansion testing
+│   │   │   └── Inheritance: apb_base_test
+│   │   │
+│   │   └── 📄 apb_write_only_test.svh  # ✍️ Write-only transaction testing
+│   │       ├── Purpose: Write operation verification
+│   │       ├── Test cases: Various write patterns
+│   │       ├── Verification: Data integrity, address mapping
+│   │       ├── Features: Sequential/random writes
+│   │       └── Inheritance: apb_base_test
+│   │
+│   ├── 📄 apb_env.svh               # 🌍 Testbench environment
+│   │   ├── Purpose: Complete UVM testbench environment
+│   │   ├── Components: Master agent, slave agent, scoreboard
+│   │   ├── Configuration: Environment-level settings
+│   │   ├── Analysis ports: Transaction routing
+│   │   ├── Features: Agent management, configuration control
+│   │   └── Inheritance: uvm_env
+│   │
+│   ├── 📄 apb_scoreboard.svh       # 📊 Transaction scoreboard
+│   │   ├── Purpose: Transaction integrity verification
+│   │   ├── Functionality: Master vs slave transaction comparison
+│   │   ├── Analysis exports: Transaction collection
+│   │   ├── Checking: Data integrity, protocol compliance
+│   │   ├── Features: Mismatch detection, error reporting
+│   │   └── Inheritance: uvm_scoreboard
+│   │
+│   ├── 📄 apb_test_pkg.sv          # 📦 Test package with all test registrations
+│   │   ├── Purpose: Package all test classes
+│   │   ├── Contents: All test classes and utilities
+│   │   ├── Registration: UVM test factory registration
+│   │   ├── Imports: uvm_pkg, all agent packages
+│   │   └── Exports: Complete test suite API
+│   │
+│   └── 📄 testbench.sv             # 🏗️ Top-level testbench module
+│       ├── Purpose: Top-level SystemVerilog testbench
+│       ├── Components: DUT instance, interface connections
+│       ├── Clock/reset: System clock and reset generation
+│       ├── Instantiation: UVM testbench environment
+│       ├── Features: DUT connection, signal routing
+│       └── Module type: top-level SystemVerilog module
 │
-└── 📂 rundir/                      # Run directory with build scripts
-    ├── 📄 Makefile                 # Complete build and simulation automation
+└── 📂 rundir/                      # 🚀 Run directory with build scripts
+    │
+    ├── 📄 Makefile                 # 🔨 Complete build and simulation automation
+    │   ├── Purpose: Build automation and test execution
+    │   ├── Tools: QuestaSim vlog, vsim, vcover
+    │   ├── Targets: compile, test, coverage, clean
+    │   ├── Features: Parallel execution, error handling
+    │   └── Platform: Windows MinGW64 compatible
+    │
     └── 📂 [Generated during simulation - .gitignored]
-        ├── coverage_data/          # Coverage database files (.ucdb)
-        ├── coverage_reports/       # HTML coverage reports
-        └── work/                   # Compiled simulation libraries
+        ├── 📂 coverage_data/          # 📊 Coverage database files (.ucdb)
+        │   ├── Purpose: Coverage collection database
+        │   ├── Files: Individual test coverage (.ucdb)
+        │   ├── Merged: Combined coverage database
+        │   └── Usage: Coverage analysis and reporting
+        │
+        ├── 📂 coverage_reports/       # 📈 HTML coverage reports
+        │   ├── Purpose: Human-readable coverage reports
+        │   ├── Format: Interactive HTML with charts
+        │   ├── Contents: Code coverage, functional coverage
+        │   └── Access: Web browser viewing
+        │
+        └── 📂 work/                   # 🏗️ Compiled simulation libraries
+            ├── Purpose: Compiled SystemVerilog libraries
+            ├── Contents: Elaborated design, VIP libraries
+            ├── Files: .qdb, .qpg, .qtl files
+            └── Usage: Simulation execution
 ```
 
-### 📋 File Descriptions
+### **🔍 File Purpose & Functionality Matrix**
 
-#### **Core Source Files**
-- **`apb_if.sv`** - Main APB interface with protocol assertions and timing checks
-- **`apb_base_seq_item.svh`** - Base transaction class with common properties
-- **`apb_defines.svh`** - Protocol-wide constants and timing parameters
+| **Category** | **Component** | **Primary Purpose** | **Key Features** | **Dependencies** |
+|--------------|--------------|-------------------|-----------------|-----------------|
+| **Interface** | `apb_if.sv` | Protocol definition | Assertions, clocking blocks | SystemVerilog |
+| **Common** | `apb_base_seq_item.svh` | Base transaction | Common properties, utilities | uvm_pkg |
+| **Common** | `apb_defines.svh` | Constants | Protocol parameters | None |
+| **Master** | `apb_master_driver.svh` | Protocol driving | PSEL/PENABLE control | apb_master_seq_item |
+| **Master** | `apb_master_monitor.svh` | Transaction capture | Edge detection, timing | apb_if |
+| **Slave** | `apb_slave_driver.svh` | Response generation | PREADY/PRDATA control | apb_slave_seq_item |
+| **Slave** | `apb_slave_monitor.svh` | Response capture | Response timing | apb_if |
+| **Environment** | `apb_env.svh` | Testbench container | Agent management | All agent packages |
+| **Verification** | `apb_scoreboard.svh` | Data integrity | Transaction comparison | apb_base_seq_item |
+| **Tests** | `apb_*_test.svh` | Verification scenarios | Specific test cases | apb_env, apb_test_pkg |
 
-#### **Master Agent**
-- **`apb_master_driver.svh`** - Drives PSEL, PENABLE, PWRITE, PADDR, PWDATA signals
-- **`apb_master_monitor.svh`** - Captures master transactions with proper timing
-- **`apb_master_sequencer.svh`** - Manages master transaction sequences
+### **🔗 Component Interaction Flow**
 
-#### **Slave Agent**  
-- **`apb_slave_driver.svh`** - Drives PREADY, PRDATA, PSLVERR signals
-- **`apb_slave_monitor.svh`** - Captures slave responses
-- **`apb_slave_sequencer.svh`** - Manages slave response sequences
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Master Agent  │    │   Slave Agent   │    │   Scoreboard    │
+│                 │    │                 │    │                 │
+│ ┌─────────────┐ │    │ ┌─────────────┐ │    │ ┌─────────────┐ │
+│ │   Driver    │─┼────┼─▶│   Driver    │ │    │   Compare    │ │
+│ └─────────────┘ │    │ └─────────────┘ │    │ Transactions │ │
+│        │        │    │        ▲        │    │ └─────────────┘ │
+│        ▼        │    │        │        │    │        ▲        │
+│ ┌─────────────┐ │    │ ┌─────────────┐ │    │        │        │
+│ │  Monitor    │─┼────┼─▶│  Monitor    │─┼────┼────────┘        │
+│ └─────────────┘ │    │ └─────────────┘ │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                    ┌─────────────────┐
+                    │   APB Interface │
+                    │                 │
+                    │ PCLK, PRESET_N  │
+                    │ PSEL, PENABLE   │
+                    │ PWRITE, PADDR   │
+                    │ PWDATA, PRDATA  │
+                    │ PREADY, PSLVERR │
+                    └─────────────────┘
+```
 
-#### **Testbench Components**
-- **`apb_env.svh`** - UVM environment containing master and slave agents
-- **`apb_scoreboard.svh`** - Compares master transactions with slave responses
-- **`testbench.sv`** - Top-level module with DUT instance and interface connections
+### **📊 Data Flow Architecture**
+
+```
+Master Sequencer → Master Driver → APB Interface → Slave Driver → Slave Sequencer
+        │                   │              │              │                   │
+        ▼                   ▼              ▼              ▼                   ▼
+Transaction Generation   Signal Drive   Protocol      Response Drive    Response Generation
+   (apb_master_seq)     (PSEL/PENABLE)   (APB)        (PREADY/PRDATA)   (apb_slave_seq)
+        │                   │              │              │                   │
+        └───────────────────┼──────────────┼──────────────┼───────────────────┘
+                            │              │              │
+                            ▼              ▼              ▼
+                    Master Monitor   APB Protocol   Slave Monitor
+                    (Transaction     (Physical      (Response
+                     Capture)        Interface)     Capture)
+                            │              │              │
+                            └──────────────┼──────────────┘
+                                           │
+                                           ▼
+                                    Scoreboard
+                                 (Data Integrity
+                                  Verification)
+```
 
 ## 🧪 Comprehensive Test Suite
 
