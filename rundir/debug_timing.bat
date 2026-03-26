@@ -1,0 +1,3 @@
+@echo off
+echo Running debug timing test...
+C:\questasim64_10.7c\win64\vsim.exe -c -do "run 500ns; quit -f" work.testbench +UVM_TESTNAME=apb_timing_test -coverage +UVM_VERBOSITY=UVM_HIGH

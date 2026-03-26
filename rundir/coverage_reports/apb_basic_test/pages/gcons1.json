@@ -1,0 +1,11 @@
+var g_db_data = [
+{dummy:0},
+{name:'apb_transaction_cg',f:1,type:6,id:1384,tb:'26',h:'14',m:'12',hp:'53.84%',cov:['60.00%','Y'],g:'100.00%',gp:['60.00%','Y'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/apb_common_pkg/apb_coverage',parent:'1379'},
+{name:'apb_protocol_cg',f:1,type:6,id:1390,tb:'80',h:'55',m:'25',hp:'68.75%',cov:['72.02%','Y'],g:'100.00%',gp:['72.02%','Y'],hdlPath:'/apb_common_pkg/apb_coverage',parent:'1379'},
+{name:'apb_reset_cg',f:1,type:6,id:1430,tb:'32',h:'8',m:'24',hp:'25.00%',cov:['25.00%','R'],g:'100.00%',gp:['25.00%','R'],hdlPath:'/apb_common_pkg/apb_coverage',parent:'1379'},
+{name:'apb_timing_cg',f:1,type:6,id:1450,tb:'11',h:'10',m:'1',hp:'90.90%',cov:['94.44%','G'],g:'100.00%',gp:['94.44%','G'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/apb_common_pkg/apb_coverage',parent:'1379'},
+{name:'apb_transaction_cg',f:1,type:6,id:2013,tb:'26',h:'14',m:'12',hp:'53.84%',cov:['60.00%','Y'],g:'100.00%',gp:['60.00%','Y'],opts:[[],['merge_instance','true']],hdlPath:'work.apb_common_pkg::apb_coverage',parent:'2008'},
+{name:'apb_protocol_cg',f:1,type:6,id:2019,tb:'80',h:'55',m:'25',hp:'68.75%',cov:['72.02%','Y'],g:'100.00%',gp:['72.02%','Y'],hdlPath:'work.apb_common_pkg::apb_coverage',parent:'2008'},
+{name:'apb_reset_cg',f:1,type:6,id:2059,tb:'32',h:'8',m:'24',hp:'25.00%',cov:['25.00%','R'],g:'100.00%',gp:['25.00%','R'],hdlPath:'work.apb_common_pkg::apb_coverage',parent:'2008'},
+{name:'apb_timing_cg',f:1,type:6,id:2079,tb:'11',h:'10',m:'1',hp:'90.90%',cov:['94.44%','G'],g:'100.00%',gp:['94.44%','G'],opts:[[],['merge_instance','true']],hdlPath:'work.apb_common_pkg::apb_coverage',parent:'2008'}];
+processConsCovergroupsData(g_db_data);

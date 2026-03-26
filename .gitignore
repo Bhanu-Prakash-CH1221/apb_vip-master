@@ -1,0 +1,55 @@
+# QuestaSim generated files
+work/
+work*/
+*.wlf
+*.vcd
+*.ucdb
+*.db
+*.qdb
+*.qpg
+*.qtl
+transcript
+*.log
+modelsim.ini
+vsim.wlf
+
+# Coverage reports
+coverage_reports/
+coverage_data/
+*.html
+covhtmlreport/
+
+# Temporary files
+*.tmp
+*.temp
+_temp/
+_tempmsg/
+_dpi/
+_dbcontainer/
+
+# MinGW64/Windows
+*.exe
+*.bat
+*.dll
+
+# IDE files
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.o
+*.obj
+*.so
+*.dylib
+
+# Simulation output
+output.txt
+debug_timing.bat
+set
+tcl_stacktrace.txt

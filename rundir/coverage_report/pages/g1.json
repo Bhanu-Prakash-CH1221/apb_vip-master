@@ -1,0 +1,26 @@
+var g_data = {
+g984:[{dummy:0},
+{name:'apb_transaction_cg',f:1,type:1,id:985,tb:'123',h:'25',m:'98',hp:'20.32%',cov:['45.00%','R'],g:'100.00%',gp:['45.00%','R'],opts:[[],['merge_instance','auto(true)']],parent:'984'},
+{name:'apb_protocol_cg',f:1,type:1,id:992,tb:'72',h:'44',m:'28',hp:'61.11%',cov:['63.33%','Y'],g:'100.00%',gp:['63.33%','Y'],parent:'984'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_protocol_cg ',f:1,type:2,id:1001,tb:'24',h:'0',m:'24',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_protocol_cg',parent:'992'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_protocol_cg#2 ',f:1,type:2,id:1010,tb:'24',h:'22',m:'2',hp:'91.66%',cov:['95.00%','G'],g:'100.00%',gp:['95.00%','G'],cvg:'apb_protocol_cg',parent:'992'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_protocol_cg#3 ',f:1,type:2,id:1019,tb:'24',h:'22',m:'2',hp:'91.66%',cov:['95.00%','G'],g:'100.00%',gp:['95.00%','G'],cvg:'apb_protocol_cg',parent:'992'},
+{name:'apb_reset_cg',f:1,type:1,id:1028,tb:'24',h:'0',m:'24',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],parent:'984'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_reset_cg ',f:1,type:2,id:1032,tb:'8',h:'0',m:'8',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_reset_cg',parent:'1028'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_reset_cg#2 ',f:1,type:2,id:1036,tb:'8',h:'0',m:'8',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_reset_cg',parent:'1028'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_reset_cg#3 ',f:1,type:2,id:1040,tb:'8',h:'0',m:'8',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_reset_cg',parent:'1028'},
+{name:'apb_timing_cg',f:1,type:1,id:1044,tb:'8',h:'1',m:'7',hp:'12.50%',cov:['16.66%','R'],g:'100.00%',gp:['16.66%','R'],opts:[[],['merge_instance','auto(true)']],parent:'984'}],
+g1622:[{dummy:0},
+{name:'apb_transaction_cg',f:1,type:1,id:1623,tb:'123',h:'25',m:'98',hp:'20.32%',cov:['45.00%','R'],g:'100.00%',gp:['45.00%','R'],opts:[[],['merge_instance','true']],parent:'1622'},
+{name:'apb_protocol_cg',f:1,type:1,id:1630,tb:'72',h:'44',m:'28',hp:'61.11%',cov:['63.33%','Y'],g:'100.00%',gp:['63.33%','Y'],parent:'1622'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_protocol_cg ',f:1,type:2,id:1639,tb:'24',h:'0',m:'24',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_protocol_cg',parent:'1630'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_protocol_cg#2 ',f:1,type:2,id:1648,tb:'24',h:'22',m:'2',hp:'91.66%',cov:['95.00%','G'],g:'100.00%',gp:['95.00%','G'],cvg:'apb_protocol_cg',parent:'1630'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_protocol_cg#3 ',f:1,type:2,id:1657,tb:'24',h:'22',m:'2',hp:'91.66%',cov:['95.00%','G'],g:'100.00%',gp:['95.00%','G'],cvg:'apb_protocol_cg',parent:'1630'},
+{name:'apb_reset_cg',f:1,type:1,id:1666,tb:'24',h:'0',m:'24',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],parent:'1622'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_reset_cg ',f:1,type:2,id:1670,tb:'8',h:'0',m:'8',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_reset_cg',parent:'1666'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_reset_cg#2 ',f:1,type:2,id:1674,tb:'8',h:'0',m:'8',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_reset_cg',parent:'1666'},
+{name:'\\/apb_common_pkg::apb_coverage::apb_reset_cg#3 ',f:1,type:2,id:1678,tb:'8',h:'0',m:'8',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],cvg:'apb_reset_cg',parent:'1666'},
+{name:'apb_timing_cg',f:1,type:1,id:1682,tb:'8',h:'1',m:'7',hp:'12.50%',cov:['16.66%','R'],g:'100.00%',gp:['16.66%','R'],opts:[[],['merge_instance','true']],parent:'1622'}],
+dummyEnd:0
+};
+processCovergroupsData(g_data);
