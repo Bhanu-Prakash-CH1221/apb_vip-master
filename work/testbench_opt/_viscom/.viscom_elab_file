@@ -1,1 +1,0 @@
-E:/intel_FPGA_lite/24.1.std/questa_fse/win64/VisualizerRls/bin/viscom.exe -nolock -quiet -jmem_size 85672224 +acc -debugdb testbench -o testbench_opt +__betafsm
