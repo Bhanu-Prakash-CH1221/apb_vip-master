@@ -1,0 +1,4 @@
+-html
+-htmldir
+coverage_reports/merged
+coverage_data/merged.ucdb

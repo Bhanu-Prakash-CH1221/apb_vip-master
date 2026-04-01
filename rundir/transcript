@@ -1,5 +1,5 @@
 # vsim -c -do "coverage save -onexit coverage_data/apb_nocfg_test_quiet.ucdb -testname apb_nocfg_test_quiet; run -all; quit -f" testbench_opt "+UVM_TESTNAME=apb_nocfg_test" "+UVM_NO_RELNOTES" "+DISABLE_CLOCK_DEBUG" "+DISABLE_MONITOR" "+DISABLE_WAVES" "+uvm_set_verbosity=_ALL_,_ALL_,UVM_NONE,build" "+uvm_set_verbosity=_ALL_,_ALL_,UVM_NONE,run" -coverage -coveranalysis -voptargs="+cover=bcesft+assert" 
-# Start time: 00:47:55 on Apr 02,2026
+# Start time: 01:46:37 on Apr 02,2026
 # //  Questa Sim-64
 # //  Version 10.7c win64 Aug 18 2018
 # //
@@ -2921,5 +2921,5 @@
 # ** Note: $finish    : C:/questasim64_10.7c/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 5505 ns  Iteration: 54  Instance: /testbench
 # Saving coverage database on exit...
-# End time: 00:48:00 on Apr 02,2026, Elapsed time: 0:00:05
+# End time: 01:46:44 on Apr 02,2026, Elapsed time: 0:00:07
 # Errors: 0, Warnings: 0

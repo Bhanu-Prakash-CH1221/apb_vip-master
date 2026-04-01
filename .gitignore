@@ -13,11 +13,10 @@ transcript
 modelsim.ini
 vsim.wlf
 
-# Coverage reports
-coverage_reports/
-coverage_data/
-*.html
-covhtmlreport/
+# Coverage reports (commented out to track in git)
+# coverage_reports/
+# coverage_data/
+# *.html
 
 # Temporary files
 *.tmp
