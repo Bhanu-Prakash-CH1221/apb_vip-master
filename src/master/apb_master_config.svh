@@ -1,3 +1,11 @@
+//-----------------------------------------------------------------------------
+// Project      : APB VIP - Advanced Peripheral Bus Verification IP
+// File         : apb_master_config.svh
+// Description  : Master agent configuration object
+// Author       : CH Bhanu Prakash
+// Notes        : Configuration parameters for APB master agent
+//-----------------------------------------------------------------------------
+
 `ifndef _APB_MASTER_CONFIG_
 `define _APB_MASTER_CONFIG_
 
@@ -6,13 +14,15 @@ import uvm_pkg::*;
 
 class apb_master_config extends uvm_object;
     
+    // Agent mode enumeration
     typedef enum {UVM_ACTIVE, UVM_PASSIVE} uvm_active_passive_enum;
     
-    uvm_active_passive_enum is_active      = UVM_ACTIVE;
-    bit                     has_coverage   = 0;
-    bit                     has_scoreboard = 0;
+    // Configuration parameters
+    uvm_active_passive_enum is_active      = UVM_ACTIVE;  // Agent mode (active/passive)
+    bit                     has_coverage   = 0;          // Enable coverage collection
+    bit                     has_scoreboard = 0;          // Enable scoreboard checking
     
-    // Manual Factory Registration - Eliminates Macro Branches
+    // UVM factory registration for object creation
     typedef uvm_object_registry#(apb_master_config, "apb_master_config") type_id;
     static function type_id get_type(); return type_id::get(); endfunction
     virtual function uvm_object_wrapper get_object_type(); return type_id::get(); endfunction
@@ -25,6 +35,7 @@ class apb_master_config extends uvm_object;
         super.new(name);
     endfunction
 
+    // Deep copy implementation for configuration objects
     virtual function void do_copy(uvm_object rhs);
         apb_master_config rhs_;
         if (!$cast(rhs_, rhs)) return;
@@ -34,6 +45,7 @@ class apb_master_config extends uvm_object;
         this.has_scoreboard = rhs_.has_scoreboard;
     endfunction
 
+    // Configuration comparison implementation
     virtual function bit do_compare(uvm_object rhs, uvm_comparer comparer);
         apb_master_config rhs_;
         bit status = 1;
@@ -45,6 +57,7 @@ class apb_master_config extends uvm_object;
         return status;
     endfunction
 
+    // Formatted print implementation for debugging
     virtual function void do_print(uvm_printer printer);
         super.do_print(printer);
         printer.print_string("is_active", this.is_active.name());
