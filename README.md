@@ -500,7 +500,7 @@ The APB VIP implements a **dual-agent architecture** with master and slave compo
 - **Performance**: Optimized simulation speed
 
 **Simulation Metrics:**
-- **Compilation Time**: < 2 minutes for full project
+- **Compilation Time**: < 5 minutes for full project
 - **Simulation Speed**: 1,000+ transactions/second
 - **Memory Usage**: < 512MB for full regression
 - **CPU Utilization**: Efficient multi-core usage
