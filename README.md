@@ -137,17 +137,43 @@ apb_vip-master/
 │   │   ├── 📄 apb_common_pkg.sv    # Common package
 │   │   └── 📄 apb_coverage.svh    # Coverage collector
 │   │
-│   ├── � master/                  # Master agent
-│   │   ├── 📄 apb_master_*.svh     # All master components
-│   │   └── 📄 apb_master_pkg.sv    # Master package
+│   ├── 📂 master/                  # Master agent
+│   │   ├── 📄 apb_master_agent.svh      # Master agent component
+│   │   ├── 📄 apb_master_config.svh     # Master configuration object
+│   │   ├── 📄 apb_master_driver.svh     # Master driver
+│   │   ├── 📄 apb_master_monitor.svh    # Master monitor
+│   │   ├── 📄 apb_master_pkg.sv        # Master package
+│   │   ├── 📄 apb_master_read_seq.svh   # Read-only sequence
+│   │   ├── 📄 apb_master_seq.svh        # Base master sequence
+│   │   ├── 📄 apb_master_seq_item.svh   # Master transaction item
+│   │   ├── 📄 apb_master_sequencer.svh  # Master sequencer
+│   │   └── 📄 apb_master_write_seq.svh  # Write-only sequence
 │   │
 │   └── 📂 slave/                   # Slave agent
-│       ├── 📄 apb_slave_*.svh      # All slave components
-│       └── 📄 apb_slave_pkg.sv     # Slave package
+│       ├── 📄 apb_slave_agent.svh       # Slave agent component
+│       ├── 📄 apb_slave_config.svh      # Slave configuration object
+│       ├── 📄 apb_slave_driver.svh     # Slave driver
+│       ├── 📄 apb_slave_monitor.svh    # Slave monitor
+│       ├── 📄 apb_slave_pkg.sv        # Slave package
+│       ├── 📄 apb_slave_seq.svh        # Slave response sequence
+│       ├── 📄 apb_slave_seq_item.svh   # Slave transaction item
+│       └── 📄 apb_slave_sequencer.svh  # Slave sequencer
 │
 ├── 📂 tb/                          # Testbench
 │   ├── 📂 tests/                   # Test suite
-│   │   └── 📄 apb_*_test.svh      # 13 comprehensive tests
+│   │   ├── 📄 apb_basic_test.svh       # Core APB protocol verification
+│   │   ├── 📄 apb_factory_test.svh     # UVM factory pattern testing
+│   │   ├── 📄 apb_field_auto_test.svh  # Field automation testing
+│   │   ├── 📄 apb_master_passive_test.svh # Master agent passive mode
+│   │   ├── 📄 apb_nocfg_test.svh       # No configuration testing
+│   │   ├── 📄 apb_passive_test.svh     # Passive mode testing
+│   │   ├── 📄 apb_protocol_test.svh    # Protocol compliance verification
+│   │   ├── 📄 apb_read_only_test.svh   # Read-only transaction testing
+│   │   ├── 📄 apb_reset_test.svh       # Reset functionality testing
+│   │   ├── 📄 apb_timing_test.svh      # Timing parameter testing
+│   │   ├── 📄 apb_transaction_test.svh  # Transaction level testing
+│   │   ├── 📄 apb_uvm_macro_test.svh   # UVM macro testing
+│   │   └── 📄 apb_write_only_test.svh  # Write-only transaction testing
 │   ├── 📄 apb_env.svh              # Environment
 │   ├── 📄 apb_scoreboard.svh       # Scoreboard
 │   ├── 📄 apb_test_pkg.sv          # Test package
