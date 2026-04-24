@@ -11,6 +11,7 @@
 
 `include "uvm_macros.svh"
 import uvm_pkg::*;
+import apb_common_pkg::*;
 
 class apb_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(apb_scoreboard)
